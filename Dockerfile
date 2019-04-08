@@ -8,9 +8,9 @@ RUN npm install
 
 COPY . .
 
-RUN cd backend && npm install
+# RUN cd backend && npm install
 
-RUN cd client && npm install
+# RUN cd client && npm install
 
 EXPOSE 8080
 
