@@ -3,6 +3,7 @@ import Login from './pages/login';
 import Threads from './pages/threads';
 import NewThread from './pages/newthread';
 import {BrowserRouter, Route} from 'react-router-dom';
+
 class App extends Component {
 
     render(){

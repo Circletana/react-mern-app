@@ -11,6 +11,7 @@ import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 import { Redirect } from 'react-router';
 import CssBaseline from "@material-ui/core/CssBaseline/CssBaseline";
+import ParticleComponent from '../components/particles';
 
 class Login extends Component {
     state = {
@@ -25,7 +26,7 @@ class Login extends Component {
     componentWillMount() {
         let token = localStorage.getItem("token");
         axios.defaults.headers.common['Authorization'] = token;
-        axios.post('http://localhost:3001/api/user')
+        axios.post('/api/user')
         .then(resp=>{
             // console.log(resp.data);
             if(resp.data.status==="error")
@@ -37,7 +38,7 @@ class Login extends Component {
     }
 
     login(){
-        axios.post('http://localhost:3001/api/login', {email:this.state.email, password:this.state.password})
+        axios.post('/api/login', {email:this.state.email, password:this.state.password})
         .then(resp=>{
             console.log(resp.data)
             if(resp.data.status==="error")
@@ -51,7 +52,7 @@ class Login extends Component {
     }
 
     register(){
-        axios.post('http://localhost:3001/api/signup', {email:this.state.email, password:this.state.password})
+        axios.post('/api/signup', {email:this.state.email, password:this.state.password})
         .then(resp=>{
             console.log(resp.data)
             if(resp.data.status==="error")
@@ -75,6 +76,8 @@ class Login extends Component {
 
         return ( 
             <div>
+                <ParticleComponent />
+                <div style={{position:"absolute", top:0, left:0, height:"100%", width:"100%"}}>
                 <CssBaseline />
                 <AppBar position="static">
                     <Toolbar variant="dense">
@@ -116,6 +119,7 @@ class Login extends Component {
                     autoHideDuration={4000}
                     onClose={this.handleClose}/>
                 </Paper>
+            </div>
             </div>
         );
     }

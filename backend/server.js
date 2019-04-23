@@ -8,6 +8,7 @@ const cors = require('cors');
 
 const app = express();
 const router = require('./routes/api');
+const path = require('path');
 
 const url = Config.MONGO_URI;
 
@@ -25,6 +26,8 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(logger("dev"));
+
+app.use(express.static(path.join(__dirname, "..", "client", "build" )));
 
 // append /api for our http requests
 app.use("/api", router);
