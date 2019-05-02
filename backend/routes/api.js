@@ -6,6 +6,7 @@ const Config = require('../config');
 const User = require('../models/user');
 const ThreadController = require('../controllers/thread');
 const AuthController = require('../controllers/auth');
+const cache = require('express-redis-cache')({ client: require('../helpers/redis').getRedis });
 
 function isAuthenticated(req, res, next) {
     if (!req.headers.authorization) {
