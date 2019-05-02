@@ -14,7 +14,7 @@ const fileUpload = require('express-fileupload');
 
 const url = Config.MONGO_URI;
 
-mongoose.connect(url, { useNewUrlParser: true }).then(mongo=>{
+mongoose.connect(url, { useNewUrlParser: true, useCreateIndex: true }).then(mongo=>{
     let database = mongo.connection.db;
     database.collection('threads').createIndex({title: "text", description: "text"}).then().catch(err=>console.log(err));
 });
