@@ -23,7 +23,7 @@ class NavBar extends Component{
     componentDidMount(){
         let token = localStorage.getItem("token");
         axios.defaults.headers.common['Authorization'] = token;
-        axios.post('http://localhost:3001/api/user')
+        axios.post('/api/user')
         .then(resp=>{
             console.log("navbar", resp.data);
             if(resp.data.status==="error"){

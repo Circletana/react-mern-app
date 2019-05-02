@@ -32,7 +32,7 @@ class Threads extends Component{
 
     handleSearch = (e)=>{
         this.setState({search:e.target.value});
-        axios.post('http://localhost:3001/api/loadthreads?search='+e.target.value)
+        axios.post('/api/loadthreads?search='+e.target.value)
         .then(resp=>{
             this.setState({threads:resp.data.data});
         }).catch(err=>console.log(err));
@@ -41,7 +41,7 @@ class Threads extends Component{
     getThreads = () =>{
         let token = localStorage.getItem("token");
         axios.defaults.headers.common['Authorization'] = token;
-        axios.post('http://localhost:3001/api/loadthreads')
+        axios.post('/api/loadthreads')
         .then(resp=>{
             //console.log(resp.data);
             if(resp.data.status === "error")

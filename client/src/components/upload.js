@@ -7,7 +7,7 @@ class Upload extends Component{
         let formdata = new FormData();
         const files = Array.from(e.target.files);
         files.forEach((file, i) => formdata.append(i, file));
-        Axios.post('http://localhost:3001/api/upload', formdata, { headers: {'Content-Type':'multipart/form-data'} })
+        Axios.post('/api/upload', formdata, { headers: {'Content-Type':'multipart/form-data'} })
         .then(res=>console.log(res))
         .catch(err=>console.log(err));
 

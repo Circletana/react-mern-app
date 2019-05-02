@@ -26,7 +26,7 @@ class NewThread extends Component{
             return this.setState({error:"All fields are required"});
         let token = localStorage.getItem("token");
         axios.defaults.headers.common['Authorization'] = token;
-        axios.post('http://localhost:3001/api/newthread', {title:this.state.title, description:this.state.description, tags:this.state.tags})
+        axios.post('/api/newthread', {title:this.state.title, description:this.state.description, tags:this.state.tags})
         .then(resp=>{
             console.log(resp.data);
             if(resp.data.status==="error")
