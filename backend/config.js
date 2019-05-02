@@ -1,5 +1,5 @@
 module.exports = {
-    MONGO_URI: process.env.MONGO_URI || 'mongodb://localhost:27017/proj',
+    MONGO_URI: process.env.MONGODB_URI || 'mongodb://localhost:27017/proj',
 
     TOKEN_SECRET: process.env.TOKEN_SECRET || 'secret',
 

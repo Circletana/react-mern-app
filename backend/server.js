@@ -22,7 +22,7 @@ mongoose.connect(url, { useNewUrlParser: true }).then(mongo=>{
 let db = mongoose.connection;
 
 db.once("open", () => console.log("connected to the database"));
-db.on("error", err => console.log("MongoDB connection error:", err));
+db.on("error", err => console.log("MongoDB connection error:", err.message));
 
 redisHelper.init();
 
