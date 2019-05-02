@@ -46,4 +46,11 @@ router.post('/newthread', isAuthenticated, ThreadController.createNewThread);
 
 router.post('/loadthreads', isAuthenticated, ThreadController.getAllThreads);
 
+router.post('/upload', (req, res)=>{
+    console.log("files", req.files);
+    const fs = require('fs');
+    console.log(req.files[0].data.toString("utf8"));
+    res.json({status:"success"});
+});
+
 module.exports = router;

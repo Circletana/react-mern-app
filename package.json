@@ -6,6 +6,7 @@
   "scripts": {
     "install": "cd client && npm run build",
     "start": "cd backend && node server.js",
+    "backend": "cd backend && nodemon server.js",
     "dev": "concurrently \"cd backend && nodemon server.js\" \"cd client && npm start\"",
     "build": "concurrently \"cd client && npm run build\""
   },
@@ -20,6 +21,7 @@
     "concurrently": "^4.1.0",
     "cors": "^2.8.5",
     "express": "^4.16.4",
+    "express-fileupload": "^1.1.4",
     "jwt-simple": "^0.5.5",
     "moment": "^2.24.0",
     "mongoose": "^5.4.18",
@@ -31,6 +33,7 @@
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.8",
+    "redis": "^2.8.0",
     "redux": "^4.0.1",
     "validator": "^10.11.0"
   }

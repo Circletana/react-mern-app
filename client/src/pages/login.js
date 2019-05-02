@@ -1,17 +1,11 @@
 import React, { Component } from 'react';
-import AppBar from '@material-ui/core/AppBar';
 import axios from "axios";  
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import TextField from '@material-ui/core/TextField';
-import Paper from '@material-ui/core/Paper';
-import Button from '@material-ui/core/Button';
-import Snackbar from '@material-ui/core/Snackbar';
+import {Paper, Button, Snackbar, IconButton, Typography, Toolbar, TextField, AppBar } from '@material-ui/core';
 import { Redirect } from 'react-router';
 import CssBaseline from "@material-ui/core/CssBaseline/CssBaseline";
 import ParticleComponent from '../components/particles';
+import Upload from '../components/upload';
 
 class Login extends Component {
     state = {

@@ -6,9 +6,15 @@ services:
       - /data/mongodb/db:/data/db
     ports:
       - "27017:27017"
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
   web:
     build: .
+    restart: always
     ports:
       - "8080:3001"
     links:
       - mongo
+      - redis
