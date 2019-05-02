@@ -8,6 +8,10 @@ const ThreadController = require('../controllers/thread');
 const AuthController = require('../controllers/auth');
 const cache = require('express-redis-cache')({ client: require('../helpers/redis').getRedis });
 
+cache.on('error', function(error){
+    console.error("EXPRESS-REDIS-CACHE", error);
+});
+
 function isAuthenticated(req, res, next) {
     if (!req.headers.authorization) {
         return res.send({ status:"error", message: "TokenMissing" });

@@ -10,7 +10,7 @@
     "dev": "concurrently \"cd backend && nodemon server.js\" \"cd client && npm start\"",
     "build": "concurrently \"cd client && npm run build\""
   },
-  "author": "",
+  "author": "Priyansh Balyan",
   "license": "ISC",
   "dependencies": {
     "@material-ui/core": "^3.9.2",

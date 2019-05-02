@@ -14,6 +14,8 @@ COPY . .
 
 EXPOSE 8080
 
-ENV MONGO_URI='mongodb://mongo/proj'
+ENV MONGODB_URI='mongodb://mongo/proj'
+
+ENV REDIS_URL='redis://redis'
 
 CMD ["npm", "start"]

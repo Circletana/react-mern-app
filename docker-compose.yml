@@ -1,4 +1,4 @@
-version: "2"
+version: "3"
 services:
   mongo:
     image: mongo
@@ -12,7 +12,10 @@ services:
       - "6379:6379"
   web:
     build: .
-    restart: always
+    depends_on:
+      - mongo
+      - redis
+    restart: on-failure
     ports:
       - "8080:3001"
     links:

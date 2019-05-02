@@ -22,7 +22,8 @@ mongoose.connect(url, { useNewUrlParser: true, useCreateIndex: true }).then(mong
 let db = mongoose.connection;
 
 db.once("open", () => console.log("connected to the database"));
-db.on("error", err => console.log("MongoDB connection error:", err.message));
+// db.on("error", err => console.log("MongoDB connection error:", err.message));
+db.on("error", err=> {throw new Error("MongoDB connection error "+err.message)});
 
 redisHelper.init();
 
