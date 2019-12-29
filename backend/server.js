@@ -4,28 +4,15 @@ require('dotenv').config({ path: '../.env' });
 const express = require('express');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
 const cors = require('cors');
 
 const app = express();
 const fileUpload = require('express-fileupload');
 const router = require('./routes/api');
 const redisHelper = require('./helpers/redis');
+const dbHelper = require('./helpers/db');
 
-const url = process.env.MONGO_URI;
-
-mongoose.connect(url, { useNewUrlParser: true, useCreateIndex: true }).then((mongo) => {
-	const database = mongo.connection.db;
-	if (database && database.collection) {
-		database.collection('threads').createIndex({ title: 'text', description: 'text' }).then().catch((err) => console.log(err));
-	}
-});
-
-const db = mongoose.connection;
-
-db.once('open', () => console.log('connected to the database'));
-db.on('error', console.log);
-
+dbHelper.init();
 redisHelper.init();
 
 app.use(cors());
