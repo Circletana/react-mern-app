@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 const mongoose = require('mongoose');
+
 const url = process.env.MONGO_URI;
 let dbClient = null;
 
@@ -14,7 +15,7 @@ exports.init = () => {
 	dbClient = mongoose.connection;
 
 	dbClient.once('open', () => console.log('connected to the database'));
-	dbClient.on('error', (err) => console.log(JSON.stringify(err)));
+	dbClient.on('error', (err) => console.log(err));
 };
 
 exports.getDB = () => dbClient;

@@ -2,22 +2,31 @@ version: "3"
 services:
   mongo:
     image: mongo
+    container_name: mongo_web
     volumes:
-      - /data/mongodb/db:/data/db
+      - ./data/mongo:/data/db
     ports:
       - "27017:27017"
   redis:
     image: redis
+    container_name: redis_web
     ports:
       - "6379:6379"
+    volumes:
+      - ./data/redis:/data
   web:
-    build: .
+    build: ./
+    container_name: node_web
+    volumes:
+      - ./:/usr/src/app
+      - /usr/src/app/.yarn
+      - /usr/src/app/node_modules
     depends_on:
       - mongo
       - redis
     restart: on-failure
     ports:
-      - "8080:3001"
+      - "3001:3001"
     links:
       - mongo
       - redis
