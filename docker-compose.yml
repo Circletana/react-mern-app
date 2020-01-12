@@ -27,6 +27,3 @@ services:
     restart: on-failure
     ports:
       - "3001:3001"
-    links:
-      - mongo
-      - redis

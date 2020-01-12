@@ -1,32 +1,40 @@
 const Thread = require('../models/thread');
+const _ = require('lodash');
 
-exports.getAllThreads = function(req, res){
-    let filter = {};
-    if(req.query.search && req.query.search != "")
-        filter = { $text: { $search: req.query.search}};
-    Thread.find(filter).populate('user').exec((err, threads)=>{
-        if(err){
-            console.log(err);
-            return res.json({status:"error", message:"Error loading threads"});
-        }
-        return res.json({status:"success", message:"Loading threads...", data:threads});
-    });
-}
+exports.getAllThreads = (req, res) => {
+	let filter = {};
+	if (req.query.search && req.query.search !== '') {
+		filter = { $text: { $search: req.query.search } };
+	}
+	Thread.find(filter).populate('user').exec((err, threads) => {
+		if (err) {
+			// eslint-disable-next-line no-console
+			console.log(err);
+			return res.json({ status: 'error', message: 'Error loading threads' });
+		}
+		return res.json({ status: 'success', message: 'Loading threads...', data: threads });
+	});
+};
 
-exports.createNewThread = function(req, res){
-    let thread = new Thread({
-        title: req.body.title,
-        description: req.body.description,
-        tags: req.body.tags.split(" "),
-        user: req.user
-    });
+exports.createNewThread = (req, res) => {
+	const data = req.body;
+	if (!data || !data.title || !data.description || !data.tags)
+		return res.status(400).json({ status: 'error', message: 'Invalid parameters'});
+		
+	console.log(data.tags)
+	const thread = new Thread({
+		title: data.title,
+		description: data.description,
+		tags: _.split(data.tags, ','),
+		user: req.user._id,
+	});
 
-    thread.save(err=>{
-        if(err){
-            console.log(err);
-            return res.json({status:"error", message:err.message});
-        }
-        return res.json({status:"success", message:"Thread created", data:thread});
-    })
-
-}
+	thread.save((err) => {
+		if (err) {
+			// eslint-disable-next-line no-console
+			console.log(err);
+			return res.status(400).json({ status: 'error', message: err.message });
+		}
+		return res.status(200).json({ status: 'success', message: 'Thread created', data: thread });
+	});
+};

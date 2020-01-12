@@ -15,8 +15,6 @@ exports.signup = async (req, res) => {
 	user.password = user.generateHash(req.body.password);
 	user.save((err) => {
 		if (err) {
-			// eslint-disable-next-line no-console
-			console.log(err.message);
 			let msg = err.message;
 			if (err.code === 11000) { msg = 'An account already exists with the email.'; }
 			return res.status(400).json({ status: 'error', message: msg });
@@ -26,6 +24,12 @@ exports.signup = async (req, res) => {
 };
 
 exports.login = (req, res) => {
+	if (!req.body || !req.body.email || !req.body.password) {
+		return res.json({
+			status: 'error', message: 'Invalid parameters',
+		});
+	}
+
 	User.findOne({ email: req.body.email }, (err, user) => {
 		if (err) {
 			return res.json({ status: 'error', message: err.message });

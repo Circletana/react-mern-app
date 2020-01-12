@@ -14,6 +14,7 @@ const dbHelper = require('./helpers/db');
 
 dbHelper.init();
 redisHelper.init();
+app.getRedis = redisHelper.getRedis;
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -29,9 +30,10 @@ app.use(fileUpload({
 app.use(logger('dev'));
 app.use(express.static(path.join(__dirname, '..', 'client', 'build')));
 app.use('/api', router);
-app.listen(process.env.API_PORT, () => console.log(`LISTENING ON PORT ${process.env.API_PORT}`));
 
 process.on('uncaughtException', console.log);
 process.on('unhandledRejection', console.log);
 
 module.exports = app;
+
+app.listen(process.env.API_PORT, () => console.log(`LISTENING ON PORT ${process.env.API_PORT}`));
