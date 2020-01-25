@@ -9,7 +9,8 @@
     "backend": "cd backend && nodemon server.js",
     "dev": "concurrently \"cd backend && nodemon server.js\" \"cd client && npm start\"",
     "build": "concurrently \"cd client && npm run build\"",
-    "test": "cd backend && npm test"
+    "test": "cd backend && npm test",
+    "circleci": "circleci config validate && circleci local execute"
   },
   "author": "Priyansh Balyan",
   "license": "ISC",
@@ -17,7 +18,7 @@
     "@material-ui/core": "^3.9.2",
     "@material-ui/icons": "^3.0.2",
     "axios": "^0.18.1",
-    "bcrypt-nodejs": "0.0.3",
+    "bcrypt": "^3.0.7",
     "body-parser": "^1.18.3",
     "concurrently": "^4.1.0",
     "cors": "^2.8.5",
@@ -32,7 +33,6 @@
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
     "react-particles-js": "^2.5.1",
-    "react-redux": "^6.0.1",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "^3.2.0",
@@ -43,11 +43,11 @@
     "eslint": "^6.6.0",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jest": "^23.4.0",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.16.0",
     "eslint-plugin-react-hooks": "^1.7.0",
     "jest": "^24.9.0",
-    "eslint-plugin-jest": "^23.4.0",
     "supertest": "^4.0.2"
   }
 }

@@ -1,5 +1,5 @@
 const jwt = require('jwt-simple');
-const bcrypt = require('bcrypt-nodejs');
+const bcrypt = require('bcrypt');
 const User = require('../models/user');
 
 // eslint-disable-next-line consistent-return

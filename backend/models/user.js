@@ -1,6 +1,6 @@
 
 const validator = require('validator');
-const bcrypt = require('bcrypt-nodejs');
+const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
@@ -25,8 +25,5 @@ const User = new Schema({
 
 });
 
-User.methods.generateHash = (password) => bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
-
-User.methods.validPassword = (password) => bcrypt.compareSync(password, this.password);
-
+User.methods.generateHash = (password) => bcrypt.hashSync(password, 10);
 module.exports = mongoose.model('User', User);
