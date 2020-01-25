@@ -5,7 +5,6 @@ import {Paper, Button, Snackbar, IconButton, Typography, Toolbar, TextField, App
 import { Redirect } from 'react-router';
 import CssBaseline from "@material-ui/core/CssBaseline/CssBaseline";
 import ParticleComponent from '../components/particles';
-import Upload from '../components/upload';
 
 class Login extends Component {
     state = {

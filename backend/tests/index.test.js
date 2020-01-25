@@ -1,12 +1,13 @@
 process.env.NODE_ENV = 'test';
-process.env.MONGO_URI = 'mongodb://mongo:27017/test';
+process.env.MONGO_URI = 'mongodb://localhost:27017/test';
 process.env.API_PORT = 3004;
+process.env.JWT_TOKEN_SECRET = 'secret';
 
+const request = require('supertest');
 const User = require('../models/user');
 const Thread = require('../models/thread');
 
 const app = require('../server');
-const request = require('supertest');
 
 beforeAll(async () => {
 	await User.deleteMany({});
@@ -70,21 +71,19 @@ describe('Tests non authenticated routes', () => {
 		expect(res.statusCode).toEqual(404);
 		expect(res.body).toHaveProperty('status', 'error');
 		expect(res.body).toHaveProperty('message', 'Invalid route');
-
 	});
 });
 
 describe('Tests authenticated routes', () => {
-
 	let token = null;
 	beforeAll(async () => {
 		const res = await request(app)
-		.post('/api/login')
-		.send({ email: 'dummy@gmail.com', password: '12345' });
-	
+			.post('/api/login')
+			.send({ email: 'dummy@gmail.com', password: '12345' });
+
 		token = res.body.data.token;
 	});
-	
+
 	test('should give authenticated user details', async () => {
 		const res = await request(app)
 			.post('/api/user')

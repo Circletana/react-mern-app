@@ -1,5 +1,5 @@
-const Thread = require('../models/thread');
 const _ = require('lodash');
+const Thread = require('../models/thread');
 
 exports.getAllThreads = (req, res) => {
 	let filter = {};
@@ -18,14 +18,15 @@ exports.getAllThreads = (req, res) => {
 
 exports.createNewThread = (req, res) => {
 	const data = req.body;
-	if (!data || !data.title || !data.description || !data.tags)
-		return res.status(400).json({ status: 'error', message: 'Invalid parameters'});
-		
-	console.log(data.tags)
+	if (!data || !data.title || !data.description || !data.tags) {
+		return res.status(400).json({ status: 'error', message: 'Invalid parameters' });
+	}
+
 	const thread = new Thread({
 		title: data.title,
 		description: data.description,
 		tags: _.split(data.tags, ','),
+		// eslint-disable-next-line no-underscore-dangle
 		user: req.user._id,
 	});
 

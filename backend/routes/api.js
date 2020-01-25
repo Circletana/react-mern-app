@@ -34,6 +34,7 @@ function isAuthenticated(req, res, next) {
 
 	User.findOne({ email: payload.email }, (err, user) => {
 		if (!user) return res.send({ status: 'error', message: 'UserNotFound' });
+		// eslint-disable-next-line no-param-reassign
 		delete user.password;
 		req.user = user;
 		return next();
